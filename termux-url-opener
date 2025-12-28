@@ -37,6 +37,8 @@ MP4_CODE="b[ext=mp4][height<=${VQ}]/bv[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/
 
 run ()
 {
+    local format_code
+
     yt-dlp "$1" -F
     #yt-dlp "$1" -Fv
     #yt-dlp "$1" -F --extractor-args youtube:player_client=all
