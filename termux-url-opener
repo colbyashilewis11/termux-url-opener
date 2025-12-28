@@ -99,7 +99,7 @@ print_msg()
 
 invalid_sc()
 {
-    echo "invalid command: '${1}'" >&2
+    echo "invalid shortcut: '${1}'" >&2
 }
 
 pause()
