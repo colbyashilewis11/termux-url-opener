@@ -77,13 +77,13 @@ run ()
 print_help()
 {
     echo "Shortcuts:"
-    print_cmd "${HELP_S}" "${HELP_L}" "show this help message and exit"
-    print_cmd "${YT_S}" "${YT_L}" "${VQ}p with audio (YouTube)"
-    print_cmd "${YT_EN_S}" "${YT_EN_L}" "${VQ}p with English audio (YouTube)"
-    print_cmd "${MP4_S}" "${MP4_L}" "${VQ}p or lower with audio (mp4)"
-    print_cmd "${UNI_S}" "${UNI_L}" "${VQ}p or lower with audio (universal)"
+    print_sc "${HELP_S}" "${HELP_L}" "show this help message and exit"
+    print_sc "${YT_S}" "${YT_L}" "${VQ}p with audio (YouTube)"
+    print_sc "${YT_EN_S}" "${YT_EN_L}" "${VQ}p with English audio (YouTube)"
+    print_sc "${MP4_S}" "${MP4_L}" "${VQ}p or lower with audio (mp4)"
+    print_sc "${UNI_S}" "${UNI_L}" "${VQ}p or lower with audio (universal)"
 }
-print_cmd()
+print_sc()
 {
     print_msg "${1}, ${2}" "${3}"
 }
