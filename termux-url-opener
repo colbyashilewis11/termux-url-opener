@@ -67,6 +67,11 @@ run ()
         "${MP4_S}" | "${MP4_L}")
             format_code="${MP4_CODE}"
         ;;
+        "-"*)
+            invalid_sc "${format_code}"
+            pause
+            return 1
+        ;;
     esac
         
     yt-dlp "$1" -f "${format_code}"
@@ -90,6 +95,11 @@ print_sc()
 print_msg()
 {
     printf '  %-15s%s\n' "${1}" "${2}"
+}
+
+invalid_sc()
+{
+    echo "invalid command: '${1}'" >&2
 }
 
 pause()
