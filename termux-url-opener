@@ -1,0 +1,92 @@
+#!/bin/bash
+set -eu
+#set -eux
+
+#YouTube 360p
+#18
+#YouTube 720p
+#22
+#136+140
+
+#help
+HELP_S="-h"
+HELP_L="--help"
+
+#yt720
+YT_720_S="-y"
+YT_720_L="--yt720"
+YT_720_CODE="136+(140/m4a[language=ja]/m4a)"
+
+#yt720en
+YT_720EN_S="-e"
+YT_720EN_L="--yt720en"
+YT_720EN_CODE="136+(m4a[language=en-US]/m4a[language=en])"
+
+#uni720
+UNI_720_S="-u"
+UNI_720_L="--uni720"
+UNI_720_CODE="b[height<=720]/bv[height<=720]+ba"
+
+#mp4_720
+MP4_720_S="-m"
+MP4_720_L="--mp4-720"
+MP4_720_CODE="b[ext=mp4][height<=720]/bv[ext=mp4][height<=720]+(m4a/ba[ext=mp4]/ba)"
+
+run ()
+{
+    yt-dlp "$1" -F
+    #yt-dlp "$1" -Fv
+    #yt-dlp "$1" -F --extractor-args youtube:player_client=all
+    
+    #print_help
+    read -r -p "FORMAT_CODE:" format_code
+
+    case "${format_code}" in
+        "")
+            return
+        ;;
+        "${HELP_S}" | "${HELP_L}")
+            print_help
+            pause
+            return
+        ;;
+        "${YT_720_S}" | "${YT_720_L}")
+            format_code="${YT_720_CODE}"
+        ;;
+        "${YT_720EN_S}" | "${YT_720EN_L}")
+            format_code="${YT_720EN_CODE}"
+        ;;
+        "${UNI_720_S}" | "${UNI_720_L}")
+            format_code="${UNI_720_CODE}"
+        ;;
+        "${MP4_720_S}" | "${MP4_720_L}")
+            format_code="${MP4_720_CODE}"
+        ;;
+    esac
+        
+    yt-dlp "$1" -f "${format_code}"
+    #yt-dlp "$1" -f "${format_code}" --get-format
+    pause
+}
+
+print_help()
+{
+    echo "commands:"
+    print_cmd "${HELP_S}" "${HELP_L}" "show this help message and exit"
+    print_cmd "${YT_720_S}" "${YT_720_L}" "720p with audio (YouTube)"
+    print_cmd "${YT_720EN_S}" "${YT_720EN_L}" "720p with English audio (YouTube)"
+    print_cmd "${MP4_720_S}" "${MP4_720_L}" "720p or lower with audio (mp4)"
+    print_cmd "${UNI_720_S}" "${UNI_720_L}" "720p or lower with audio (universal)"
+}
+
+print_cmd()
+{
+    printf '  %-15s%s\n' "${1}, ${2}" "${3}"
+}
+
+pause()
+{
+    read -r -p "PRESS_ENTER:" answer
+}
+
+run "$1"
