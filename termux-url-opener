@@ -4,33 +4,35 @@ set -eu
 
 #YouTube 360p
 #18
+#YouTube 480p
+#135+140
 #YouTube 720p
-#22
 #136+140
+
+VQ="720"
 
 #help
 HELP_S="-h"
 HELP_L="--help"
 
-#yt720
-YT_720_S="-y"
-YT_720_L="--yt720"
-YT_720_CODE="136+(140/m4a[language=ja]/m4a)"
+#YouTube EN
+YT_EN_S="-e"
+YT_EN_L="--yt${VQ}en"
+YT_EN_CODE="136+(m4a[language=en-US]/m4a[language=en])"
+#YouTube
+YT_S="-y"
+YT_L="--yt${VQ}"
+YT_CODE="136+(140/m4a[language=ja/m4a)"
 
-#yt720en
-YT_720EN_S="-e"
-YT_720EN_L="--yt720en"
-YT_720EN_CODE="136+(m4a[language=en-US]/m4a[language=en])"
+#universal
+UNI_S="-u"
+UNI_L="--uni${VQ}"
+UNI_CODE="b[height<=${VQ}]/bv[height<=${VQ}]+ba"
 
-#uni720
-UNI_720_S="-u"
-UNI_720_L="--uni720"
-UNI_720_CODE="b[height<=720]/bv[height<=720]+ba"
-
-#mp4_720
-MP4_720_S="-m"
-MP4_720_L="--mp4-720"
-MP4_720_CODE="b[ext=mp4][height<=720]/bv[ext=mp4][height<=720]+(m4a/ba[ext=mp4]/ba)"
+#mp4
+MP4_S="-m"
+MP4_L="--mp4-${VQ}"
+MP4_CODE="b[ext=mp4][height<=${VQ}]/bv[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/ba)"
 
 run ()
 {
@@ -50,17 +52,17 @@ run ()
             pause
             return
         ;;
-        "${YT_720_S}" | "${YT_720_L}")
-            format_code="${YT_720_CODE}"
+        "${YT_S}" | "${YT_L}")
+            format_code="${YT_CODE}"
         ;;
-        "${YT_720EN_S}" | "${YT_720EN_L}")
-            format_code="${YT_720EN_CODE}"
+        "${YT_EN_S}" | "${YT_EN_L}")
+            format_code="${YT_EN_CODE}"
         ;;
-        "${UNI_720_S}" | "${UNI_720_L}")
-            format_code="${UNI_720_CODE}"
+        "${UNI_S}" | "${UNI_L}")
+            format_code="${UNI_CODE}"
         ;;
-        "${MP4_720_S}" | "${MP4_720_L}")
-            format_code="${MP4_720_CODE}"
+        "${MP4_S}" | "${MP4_L}")
+            format_code="${MP4_CODE}"
         ;;
     esac
         
@@ -73,12 +75,11 @@ print_help()
 {
     echo "commands:"
     print_cmd "${HELP_S}" "${HELP_L}" "show this help message and exit"
-    print_cmd "${YT_720_S}" "${YT_720_L}" "720p with audio (YouTube)"
-    print_cmd "${YT_720EN_S}" "${YT_720EN_L}" "720p with English audio (YouTube)"
-    print_cmd "${MP4_720_S}" "${MP4_720_L}" "720p or lower with audio (mp4)"
-    print_cmd "${UNI_720_S}" "${UNI_720_L}" "720p or lower with audio (universal)"
+    print_cmd "${YT_S}" "${YT_L}" "${VQ}p with audio (YouTube)"
+    print_cmd "${YT_EN_S}" "${YT_EN_L}" "${VQ}p with English audio (YouTube)"
+    print_cmd "${MP4_S}" "${MP4_L}" "${VQ}p or lower with audio (mp4)"
+    print_cmd "${UNI_S}" "${UNI_L}" "${VQ}p or lower with audio (universal)"
 }
-
 print_cmd()
 {
     printf '  %-15s%s\n' "${1}, ${2}" "${3}"
