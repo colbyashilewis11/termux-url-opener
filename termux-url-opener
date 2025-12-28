@@ -10,6 +10,7 @@ set -eu
 #136+140
 
 VQ="720"
+LANG="ja"
 
 #help
 HELP_S="-h"
@@ -22,7 +23,7 @@ YT_EN_CODE="136+(m4a[language=en-US]/m4a[language=en])"
 #YouTube
 YT_S="-y"
 YT_L="--yt${VQ}"
-YT_CODE="136+(140/m4a[language=ja/m4a)"
+YT_CODE="136+(140/m4a[language=${LANG}]/m4a)"
 
 #universal
 UNI_S="-u"
