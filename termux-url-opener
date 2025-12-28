@@ -85,7 +85,11 @@ print_help()
 }
 print_cmd()
 {
-    printf '  %-15s%s\n' "${1}, ${2}" "${3}"
+    print_msg "${1}, ${2}" "${3}"
+}
+print_msg()
+{
+    printf '  %-15s%s\n' "${1}" "${2}"
 }
 
 pause()
