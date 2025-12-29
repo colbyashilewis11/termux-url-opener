@@ -74,8 +74,8 @@ run ()
         ;;
     esac
         
-    yt-dlp "$1" -f "${format_code}"
-    #yt-dlp "$1" -f "${format_code}" --get-format
+    yt-dlp "$1" -f "${format_code}" --no-audio-multistreams
+    #yt-dlp "$1" -f "${format_code}" --no-audio-multistreams --get-format
     pause
 }
 
