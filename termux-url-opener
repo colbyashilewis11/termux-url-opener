@@ -98,6 +98,7 @@ print_help()
     print_sc "${YT_EN_S}" "${YT_EN_L}" "${VQ}p with English audio (YouTube)"
     print_sc "${MP4_S}" "${MP4_L}" "${VQ}p or lower with audio (mp4)"
     print_sc "${UNI_S}" "${UNI_L}" "${VQ}p or lower with audio (universal)"
+    print_sc "${DEF_S}" "${DEF_L}" "default format (without -f option)"
 }
 print_sc()
 {
