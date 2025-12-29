@@ -28,12 +28,12 @@ YT_CODE="136+(140/m4a[language=${LANG}]/m4a)"
 #universal
 UNI_S="-u"
 UNI_L="--uni${VQ}"
-UNI_CODE="b[height<=${VQ}]/bv[height<=${VQ}]+ba"
+UNI_CODE="bv*[height<=${VQ}]+ba/b[height<=${VQ}]"
 
 #mp4
 MP4_S="-m"
 MP4_L="--mp4-${VQ}"
-MP4_CODE="b[ext=mp4][height<=${VQ}]/bv[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/ba)"
+MP4_CODE="bv*[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/ba)/b[ext=mp4][height<=${VQ}]"
 
 run ()
 {
