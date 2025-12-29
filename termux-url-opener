@@ -35,6 +35,10 @@ MP4_S="-m"
 MP4_L="--mp4-${VQ}"
 MP4_CODE="b[ext=mp4][height<=${VQ}]/bv[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/ba)"
 
+#default
+DEF_S="-d"
+DEF_L="--default"
+
 run ()
 {
     local format_code
@@ -67,6 +71,9 @@ run ()
         ;;
         "${MP4_S}" | "${MP4_L}")
             opts=("-f" "${MP4_CODE}")
+        ;;
+        "${DEF_S}" | "${DEF_L}")
+            opts=()
         ;;
         "-"*)
             invalid_sc "${format_code}"
