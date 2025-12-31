@@ -55,6 +55,7 @@ Or one of the shortcut commands below.
     -e   / --yt720en    : 720p with English audio (YouTube)
     -m   / --mp4-720    : 720p or lower (mp4)
     -u   / --uni720     : 720p or lower (universal)
+    -d   / --default    : default format (without -f option)
 ```
 You may also directly enter any format code shown by `yt-dlp -F` (or `--list-formats`).
 

@@ -35,9 +35,14 @@ MP4_S="-m"
 MP4_L="--mp4-${VQ}"
 MP4_CODE="bv*[ext=mp4][height<=${VQ}]+(m4a/ba[ext=mp4]/ba)/b[ext=mp4][height<=${VQ}]"
 
+#default
+DEF_S="-d"
+DEF_L="--default"
+
 run ()
 {
     local format_code
+    local -a opts
 
     yt-dlp "$1" -F
     #yt-dlp "$1" -Fv
@@ -56,26 +61,32 @@ run ()
             return
         ;;
         "${YT_S}" | "${YT_L}")
-            format_code="${YT_CODE}"
+            opts=("-f" "${YT_CODE}")
         ;;
         "${YT_EN_S}" | "${YT_EN_L}")
-            format_code="${YT_EN_CODE}"
+            opts=("-f" "${YT_EN_CODE}")
         ;;
         "${UNI_S}" | "${UNI_L}")
-            format_code="${UNI_CODE}"
+            opts=("-f" "${UNI_CODE}")
         ;;
         "${MP4_S}" | "${MP4_L}")
-            format_code="${MP4_CODE}"
+            opts=("-f" "${MP4_CODE}")
+        ;;
+        "${DEF_S}" | "${DEF_L}")
+            opts=()
         ;;
         "-"*)
             invalid_sc "${format_code}"
             pause
             return 1
         ;;
+        *)
+            opts=("-f" "${format_code}")
+        ;;
     esac
         
-    yt-dlp "$1" -f "${format_code}" --no-audio-multistreams
-    #yt-dlp "$1" -f "${format_code}" --no-audio-multistreams --get-format
+    #opts+=("--get-format")
+    yt-dlp "$1" "${opts[@]}" --no-audio-multistreams
     pause
 }
 
@@ -87,6 +98,7 @@ print_help()
     print_sc "${YT_EN_S}" "${YT_EN_L}" "${VQ}p with English audio (YouTube)"
     print_sc "${MP4_S}" "${MP4_L}" "${VQ}p or lower with audio (mp4)"
     print_sc "${UNI_S}" "${UNI_L}" "${VQ}p or lower with audio (universal)"
+    print_sc "${DEF_S}" "${DEF_L}" "default format (without -f option)"
 }
 print_sc()
 {
