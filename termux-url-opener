@@ -49,7 +49,7 @@ run ()
     #yt-dlp "$1" -F --extractor-args youtube:player_client=all
     
     #print_help
-    read -r -p "FORMAT_CODE:" format_code
+    read -er -p "FORMAT_CODE:" format_code
 
     case "${format_code}" in
         "")
